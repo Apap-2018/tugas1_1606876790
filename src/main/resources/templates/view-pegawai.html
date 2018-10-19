@@ -9,16 +9,17 @@
 		<nav th:replace="fragments/fragment :: navbar"></nav>
 		<br>
 		<h2 th:text="'Lihat Data Pegawai - ' + ${pegawai.nip}"></h2>
+		<br>
 		<h4 th:text="'NIP : ' + ${pegawai.nip}"></h4>
 		<h4 th:text="'Nama : ' + ${pegawai.nama}"></h4>
-		<h4 th:text="'Tempat Lahir : ' + ${pegawai.tempat_lahir}"></h4>
-		<h4 th:text="'Tanggal Lahir : ' + ${pegawai.tanggal_lahir}"></h4>
-		<h4 th:text="'Tahun Masuk : ' + ${pegawai.tahun_masuk}"></h4>
+		<h4 th:text="'Tempat Lahir : ' + ${pegawai.tempatLahir}"></h4>
+		<h4 th:text="'Tanggal Lahir : ' + ${pegawai.tanggalLahir}"></h4>
+		<h4 th:text="'Tahun Masuk : ' + ${pegawai.tahunMasuk}"></h4>
 		<h4 th:text="'Nama Instansi : ' + ${pegawai.instansi.nama} + ' - ' + ${pegawai.instansi.provinsi.nama}"></h4>
 		<h4 th:text="'Jabatan : '"></h4>
-		<div th:each="jabatan : ${jabatanList}">
-			<h4 th:text="'- ' + ${jabatan.nama}"></h4>
-		</div>
+		<ul th:each="jabatan : ${jabatanList}">
+			<li><h4 th:text="${jabatan.nama}"></h4></li>
+		</ul>
 		<h4 th:text="'Gaji : Rp' + ${gajiLengkap}"></h4>
 		<form th:action="@{/pegawai/ubah}" method="GET">
 			<input type="hidden" th:field="*{pegawai.nip}"></input>

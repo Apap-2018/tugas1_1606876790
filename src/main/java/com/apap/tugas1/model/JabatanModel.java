@@ -1,8 +1,6 @@
 package com.apap.tugas1.model;
 
 import java.io.Serializable;
-
-import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,26 +10,24 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-/**
- * JabatanModel	
- */
-
 @Entity
 @Table(name = "jabatan")
 public class JabatanModel implements Serializable {
+	private int jumlahPegawai;
+	
+	public int getJumlahPegawai() {
+		return jumlahPegawai;
+	}
+
+	public void setSizePegawai(int jumlahPegawai) {
+		this.jumlahPegawai = jumlahPegawai;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -47,10 +43,21 @@ public class JabatanModel implements Serializable {
 	private String deskripsi;
 	
 	@NotNull
-	@Size(max = 255)
 	@Column(name = "gaji_pokok", nullable = false)
-	private double gaji_pokok;
-
+	private double gajiPokok;
+	
+	@ManyToMany(fetch = FetchType.LAZY,
+		cascade = {
+				CascadeType.PERSIST,
+				CascadeType.MERGE
+		},
+		mappedBy = "jabatanList")
+	private List<PegawaiModel> pegawaiList;
+	
+	public int jabatanSize() {
+		return pegawaiList.size();
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -75,13 +82,12 @@ public class JabatanModel implements Serializable {
 		this.deskripsi = deskripsi;
 	}
 
-	public double getGaji_pokok() {
-		return gaji_pokok;
+	public double getGajiPokok() {
+		return gajiPokok;
 	}
 
-	public void setGaji_pokok(double gaji_pokok) {
-		this.gaji_pokok = gaji_pokok;
+	public void setGajiPokok(double gajiPokok) {
+		this.gajiPokok = gajiPokok;
 	}
-	
 	
 }

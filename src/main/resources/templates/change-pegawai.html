@@ -18,13 +18,13 @@
 		<input type="text" name="nama" th:field="*{nama}" />
 		<br>
 		Tempat Lahir: <br>
-		<input type="text" name="tempat_lahir" th:field="*{tempat_lahir}" /> 	
+		<input type="text" name="tempatLahir" th:field="*{tempatLahir}" /> 	
 		<br>
 		Tanggal Lahir: <br>
-		<input type="date" name="tanggal_ahir" th:field="*{tanggal_lahir}" />
+		<input type="date" name="tanggalLahir" th:field="*{tanggalLahir}" />
 		<br>
 		Tahun Masuk: <br>
-		<input type="text" name="tahun_masuk" th:field="*{tahun_masuk}"/> 	
+		<input type="text" name="tahunMasuk" th:field="*{tahunMasuk}"/> 	
 		<br>
 		Provinsi: <br>
 		
@@ -48,23 +48,22 @@
 		<br>
 		
 		Jabatan: <br>
+		(Pilih jabatan yang diinginkan, bisa lebih dari satu)
 
 		<table border="1">
 			<tr th:each="jabatan,iterationStatus : ${listJabatan}">
 				<td th:text="${iterationStatus.count}"></td>
 				<td th:text="${jabatan.nama}"></td>
 				<td>
-				<input type="checkbox" th:field="*{listJabatan}" th:value="${jabatan.id}" /> 
+				<input type="checkbox" th:field="*{jabatanList}" th:value="${jabatan.id}" /> 
 					<label
-					th:for="${#ids.prev('listJabatan')}">
-					</label>0
+					th:for="${#ids.prev('jabatanList')}">
+					</label>
 				</td>
 			</tr>
 		</table>
 
-
-
-		<button type="submit">Submit</button>
+		<button type="submit" class="btn btn-primary">Simpan</button>
 	</form>
 	
 	
