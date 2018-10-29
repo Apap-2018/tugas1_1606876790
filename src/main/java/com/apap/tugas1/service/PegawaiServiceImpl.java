@@ -87,14 +87,4 @@ public class PegawaiServiceImpl implements PegawaiService {
 		return pegawaiDB.findAll();
 	}
 
-	//@Override
-	//public long countEntity() {
-	//return pegawaiDB.count();
-	//}
-
-	//@Override
-	//public PegawaiModel getPegawaiDetailById(Long id) {
-	//return pegawaiDB.getOne(id);
-	//}
-
 }

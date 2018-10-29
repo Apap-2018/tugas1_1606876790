@@ -61,21 +61,17 @@ public class PegawaiController {
 		model.addAttribute("listProvinsi", provinsiService.getProvinsiList());
 		model.addAttribute("listJabatan", jabatanService.findAllJabatan());
 		
-		return "tambah-pegawai";
+		return "add-pegawai";
 	}
 
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.POST)
 	private String addPegwawaiSubmit(@ModelAttribute PegawaiModel pegawai, Model model) {
 		String nip = "";
-		
 		nip += pegawai.getInstansi().getId();
-		
 		String[] tglLahir = pegawai.getTanggalLahir().toString().split("-");
 		String tglLahirString = tglLahir[2] + tglLahir[1] + tglLahir[0].substring(2, 4);
 		nip += tglLahirString;
-
 		nip += pegawai.getTahunMasuk();
-
 		int counterSama = 1;
 		for (PegawaiModel pegawaiInstansi:pegawai.getInstansi().getPegawaiInstansi()) {
 			if (pegawaiInstansi.getTahunMasuk().equals(pegawai.getTahunMasuk()) && pegawaiInstansi.getTanggalLahir().equals(pegawai.getTanggalLahir())) {
@@ -90,7 +86,7 @@ public class PegawaiController {
 		pegawai.setNip(nip);
 		pegawaiService.addPegawai(pegawai);
 		model.addAttribute("pegawai", pegawai);
-		return "sukses-add-pegawai";
+		return "add-pegawai-sukses";
 	}
 	
 	@RequestMapping(value = "/pegawai/ubah")
